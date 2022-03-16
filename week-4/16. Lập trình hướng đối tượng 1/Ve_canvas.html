@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="1200" height="500" style="border:1px solid green;"></canvas>
+<Script>
+    var c=document.getElementById("myCanvas");
+    var ctx= c.getContext("2d");
+    ctx.beginPath();
+    ctx.rect(0,0,200,100);
+    ctx.strokeStyle="purple";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(0,400,200,100);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(1000,0,200,100);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(1000,400,200,100);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(100,350,50,0,2*Math.PI);
+    ctx.fillStyle="blue";
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(100,150,50,0,2*Math.PI);
+    ctx.fillStyle="green";
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(1100,350,50,0,2*Math.PI);
+    ctx.fillStyle="red";
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(1100,150,50,0,2*Math.PI);
+    ctx.fillStyle="black";
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.rect(500,400,200,100);
+    ctx.stroke();
+    ctx.font="50px Arial";
+    ctx.fillText("Hello World",470,250);
+
+</Script>
+</body>
+</html>

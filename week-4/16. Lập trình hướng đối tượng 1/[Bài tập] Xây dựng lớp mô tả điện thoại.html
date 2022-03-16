@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>*IPHONE</h1>
+<button id="onOff-Iphone" onclick="onOff(this.id)">POWER</button>
+<button id="energy-Iphone" onclick="checkEnergy(this.id)">ENERGY</button>
+<button id="message-Iphone" onclick="sendMessage(this.id)">SEND</button>
+<br>
+<textarea  id="iphone" cols="30" rows="10" ></textarea>
+<hr>
+<h1>*NOKIA</h1>
+<button id="onOff-Nokia" onclick="onOff(this.id)">POWER</button>
+<button id="energy-Nokia" onclick="checkEnergy(this.id)">ENERGY</button>
+<button id="message-Nokia" onclick="sendMessage(this.id)">SEND</button>
+<button id="inbox-Nokia" onclick="checkInBox(this.id)">INBOX</button>
+<br>
+<textarea id="nokia" cols="30" rows="10"></textarea>
+</body>
+<script>
+    class Mobile {
+        constructor(name,status, energy, outBox, inBox) {
+            this.name  = name;
+            this.status = status;
+            this.energy = energy;
+            this.outBox = [];
+            this.inBox = [];
+        }
+        getStatus(){
+            return this.status;
+        }
+        setStatus(){
+            this.status = !this.status;
+        }
+        getName(){
+            return this.name;
+        }
+        setName(name){
+            this.name = name;
+        }
+        getEnergy(){
+            return this.energy;
+        }
+        setEnergy(energy){
+            this.energy = energy;
+        }
+        getOutBox(){
+            return this.outBox;
+        }
+        setOutBox(outBox){
+            this.outBox = outBox;
+        }
+        getInBox(){
+            return this.inBox;
+        }
+        setInBox(inBox){
+            this.inBox = inBox;
+        }
+    }
+    let IPHONE = new Mobile('IPHONE', false,100);
+    let NOKIA = new Mobile('NOKIA', false,100);
+    function onOff(id) {
+        console.log('check id ==== ', id)
+        if(id==='onOff-Iphone'){
+            if(IPHONE.getStatus()){
+                IPHONE.setStatus();
+                document.getElementById('onOff-Iphone').innerHTML = 'OFF'
+                clearTimeout(myTimeOut);
+                document.getElementById("iphone").disabled = true;
+            } else {
+                IPHONE.setStatus();
+                document.getElementById('onOff-Iphone').innerHTML = 'ON'
+            }
+        } else if(id==='onOff-Nokia'){
+            if(NOKIA.getStatus()){
+                NOKIA.setStatus();
+                document.getElementById('onOff-Nokia').innerHTML = 'OFF'
+            } else {
+                NOKIA.setStatus();
+                document.getElementById('onOff-Nokia').innerHTML = 'ON'
+            }
+        }
+    }
+    function checkEnergy(id) {
+        if(id==='energy-Iphone'){
+            document.getElementById('energy-Iphone').innerHTML = IPHONE.getEnergy() + '%';
+        }
+        if(id==='energy-Nokia'){
+            document.getElementById('energy-Nokia').innerHTML = NOKIA.getEnergy() + '%';
+        }
+    }
+    let count = 0;
+    function sendMessage(id) {
+        if(!IPHONE.getStatus()){
+            return
+        }
+        if(id==='message-Iphone'){
+            count ++;
+            IPHONE.getOutBox().push(document.getElementById('iphone').value)
+            console.log('CHECK OUTBOX = ',IPHONE.getOutBox())
+            document.getElementById('nokia').value = 'You have new '+count+' message'
+            document.getElementById('iphone').value = ''
+        }
+        if(id==='message-Nokia'){
+            NOKIA.getOutBox().push(document.getElementById('nokia').value)
+            console.log('CHECK OUTBOX = ',NOKIA.getOutBox())
+            document.getElementById('nokia').value = ''
+        }
+    }
+    function checkInBox(id) {
+        if(id==='inbox-Nokia'){
+            NOKIA.setInBox( IPHONE.getOutBox());
+            console.log('NOKIA INBOX', NOKIA.getInBox())
+            document.getElementById('nokia').value = NOKIA.getInBox().join('-')
+            count = 0;
+        }
+    }
+    let myTimeOut;
+    function downEnergy() {
+        console.log('goi ham down')
+        IPHONE.setEnergy(IPHONE.getEnergy()-1)
+        console.log('CHECK TRONG HAM === ', IPHONE.getEnergy())
+        document.getElementById('energy-Iphone').innerHTML = IPHONE.getEnergy() + "%"
+        myTimeOut = setTimeout(downEnergy,1000)
+    }
+    downEnergy();
+
+
+</script>
+</html>

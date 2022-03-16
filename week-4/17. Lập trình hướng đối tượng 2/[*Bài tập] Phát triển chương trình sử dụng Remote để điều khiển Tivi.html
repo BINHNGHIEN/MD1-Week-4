@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Tivi{
+        constructor(channel,volume,status){
+            this.channel= channel;
+            this.volume= volume;
+            this.status=status;
+        }
+        getChannel(){
+            return this.channel;
+        }
+        setChannel(newChannel){
+            this.channel=newChannel;
+        }
+        getVolume(){
+            return this.volume;
+        }
+        setVolume(newVolume){
+            this.volume= newVolume;
+        }
+        getStatus(){
+            return this.status;
+        }
+        setStatus(newStatus){
+            this.status= newStatus;
+        }
+    }
+    class Remote{
+        tatMo(tivi){
+            tivi.setStatus(!tivi.getStatus());
+        }
+        changeChannel(tivi,channel){
+            if(tivi.getStatus()){
+                tivi.setChannel(channel);
+            } else{
+                console.log("Bat tivi len di bro")
+            }
+        }
+        upVolume(tivi){
+            if(tivi.getStatus()){
+                if(tivi.getVolume()<10){
+                    tivi.setVolume(tivi.getVolume()+1);
+                } else{
+                    console.log('an vua thoi')
+                }
+            }
+        }
+        downVolume(tivi){
+            if(tivi.getStatus()){
+                if(tivi.getVolume()>0){
+                    tivi.setVolume(tivi.getVolume()-1);
+                } else{
+                    console.log('bat tieng len ban oi');
+                }
+            }
+        }
+    }
+    let rm1= new Remote()
+    let tv1= newTivi(2,10,false);
+</script>
+</body>
+</html>

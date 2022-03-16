@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Chuot{
+        ten;
+        suckhoe;
+        constructor(x,y) {
+            this.ten=x;
+            this.suckhoe=y;
+        }
+        keu() {
+            document.write(this.ten+"chit chit");
+        }
+    }
+
+    class Meo{
+        ten;
+        CanNang;
+        constructor(t,cn) {
+            this.CanNang+=cn;
+            this.ten=t;
+        }
+        thit(ch){
+            ch.suckhoe= ch.suckhoe-10;
+            this.CanNang+=5;
+            if(ch.suckhoe<0){
+                ch.keu();
+            }
+        }
+        inRa(){
+            document.write(this.ten+":"+this.CanNang)
+        }
+    }
+    let jerry1= new Chuot('Jerry',10000);
+    let uc =new Chuot('UCUC',50);
+    let meo =new Meo("Tom", 70);
+    jerry1.inRa();
+
+
+</script>
+
+</body>
+</html>

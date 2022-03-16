@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="bounce.js"></script>
+<script src="stone.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .button {
+        background-color: Crimson;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button1 {background-color: Crimson; border-radius: 2px;}
+</style>
+<body>
+<button class="button button1" onclick="startGame()" id="start">Start</button>
+<div id="time">Time</div>
+<canvas id="myCanvas" width="1200" height="660" style="border: 2px solid rebeccapurple"></canvas>
+</body>
+<script>
+    let canvas = document.getElementById('myCanvas')
+    let ctx = canvas.getContext('2d');
+    const image = new Image();
+    image.onload = drawImage;
+    let bounce = new Bounce(image, 120, 600, 60, 60, 'image/bounce.jpg')
+    image.src = 'image/bounce.jpg'
+
+    function drawImage() {
+        // clearCanvas();
+        image.src = bounce.src;
+        bounce.drawImage(ctx)
+    }
+
+    let map = [
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,0,0],
+        [0,0,1,1,1,1,0,0,0,1,0,0,1,0,0,1,0,0,0,0],
+        [0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,1,1,1,0],
+        [0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,1,0],
+        [0,0,1,0,0,1,0,1,1,1,0,0,1,0,0,1,0,0,1,0],
+        [0,0,1,0,0,1,0,1,0,0,0,0,1,0,0,1,0,0,1,0],
+        [0,0,1,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,1,0],
+        [0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+
+    ]
+    let stones = [];
+    let color = 'black';
+    for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[i].length; j++) {
+            color = (map[i][j] === 0)? "blue" : "black";
+            let stone = new Stone(60*j, 60*i,60,60,color);
+            stones.push(stone);
+        }
+    }
+
+    function drawstones(){
+        for (let i = 0; i < stones.length; i++) {
+            stones[i].drawStone(ctx);
+        }
+    }
+
+
+    console.log(stones[202])
+
+    function moveBounce() {
+
+        if (bounce.x === stones[202].x && bounce.y === stones[202].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[182].x && bounce.y === stones[182].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[162].x && bounce.y === stones[162].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[142].x && bounce.y === stones[142].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[122].x && bounce.y === stones[122].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[102].x && bounce.y === stones[102].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[82].x && bounce.y === stones[82].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+
+            }
+        } else if (bounce.x === stones[83].x && bounce.y === stones[83].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+
+            }
+        } else if (bounce.x === stones[84].x && bounce.y === stones[84].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+
+            }
+        } else if (bounce.x === stones[85].x && bounce.y === stones[85].y) {
+            switch (event.keyCode) {
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[105].x && bounce.y === stones[105].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[125].x && bounce.y === stones[125].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[145].x && bounce.y === stones[145].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[165].x && bounce.y === stones[165].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[167].x && bounce.y === stones[167].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[185].x && bounce.y === stones[185].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[186].x && bounce.y === stones[186].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[187].x && bounce.y === stones[187].y) {
+            switch (event.keyCode) {
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[147].x && bounce.y === stones[147].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[148].x && bounce.y === stones[148].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[44].x && bounce.y === stones[44].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[66].x && bounce.y === stones[66].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[67].x && bounce.y === stones[67].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[68].x && bounce.y === stones[68].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[69].x && bounce.y === stones[69].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[70].x && bounce.y === stones[70].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[71].x && bounce.y === stones[71].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[193].x && bounce.y === stones[193].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[194].x && bounce.y === stones[194].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[116].x && bounce.y === stones[116].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[117].x && bounce.y === stones[117].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[76].x && bounce.y === stones[76].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[129].x && bounce.y === stones[129].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[109].x && bounce.y === stones[109].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[89].x && bounce.y === stones[89].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[92].x && bounce.y === stones[92].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[112].x && bounce.y === stones[112].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[132].x && bounce.y === stones[132].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[152].x && bounce.y === stones[152].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[172].x && bounce.y === stones[172].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[175].x && bounce.y === stones[175].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[155].x && bounce.y === stones[155].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[135].x && bounce.y === stones[135].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[95].x && bounce.y === stones[95].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[57].x && bounce.y === stones[57].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[37].x && bounce.y === stones[37].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[138].x && bounce.y === stones[138].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[158].x && bounce.y === stones[158].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[178].x && bounce.y === stones[178].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[45].x && bounce.y === stones[45].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[72].x && bounce.y === stones[72].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[118].x && bounce.y === stones[118].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[149].x && bounce.y === stones[149].y) {
+            switch (event.keyCode) {
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[195].x && bounce.y === stones[195].y) {
+            switch (event.keyCode) {
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[77].x && bounce.y === stones[77].y) {
+            switch (event.keyCode) {
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[192].x && bounce.y === stones[192].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[43].x && bounce.y === stones[43].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[115].x && bounce.y === stones[115].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[75].x && bounce.y === stones[75].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[65].x && bounce.y === stones[65].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[43].x && bounce.y === stones[43].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[23].x && bounce.y === stones[23].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+            }
+        } else if (bounce.x === stones[55].x && bounce.y === stones[55].y) {
+            switch (event.keyCode) {
+                case 40:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveDown();
+                    break;
+                case 37:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveLeft()
+                    break;
+            }
+        } else if (bounce.x === stones[54].x && bounce.y === stones[54].y) {
+            switch (event.keyCode) {
+                case 39:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveRight()
+                    break;
+            }
+        } else if (bounce.x === stones[198].x && bounce.y === stones[198].y) {
+            switch (event.keyCode) {
+                case 38:
+                    bounce.setSrc('image/bounce.jpg')
+                    bounce.moveUp();
+                    break;
+            }
+        } else if (bounce.x === stones[17].x && bounce.y === stones[17].y) {
+            alert("Bạn đã thắng rồi!! Xin chúc mừng!!!!");
+        }
+
+        clearCanvas();
+        drawstones()
+        drawImage();
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    count=30;
+    let endTime;
+    function countDown() {
+        count--;
+        endTime= setTimeout(countDown,1000);
+        console.log(count);
+        document.getElementById('time').innerHTML=count;
+        if (count<= 0){
+            clearTimeout(endTime)
+            alert("Hết giờ rồi BRO!!!")
+            return;
+        }
+    }
+
+    function startGame() {
+        countDown();
+        addEventListener('keydown', moveBounce);
+    }
+    drawImage();
+    drawstones();
+
+</script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Animal {
+        constructor(name, weight,speed,say) {
+            this.name = name;
+            this.weight = weight;
+            this.speed = speed;
+            this.say = say;
+        }
+        getName(){
+            return this.name;
+        }
+        setName(name){
+            this.name = name;
+        }
+        getWeight(){
+            return this.weight;
+        }
+        setWeight(weight){
+            this.weight = weight;
+        }
+        getSpeed(){
+            return this.speed;
+        }
+        setSpeed(speed){
+            this.speed = speed;
+        }
+        getSay(){
+            return this.say;
+        }
+        setSay(say){
+            this.say = say;
+        }
+    }
+    class Mouse extends Animal{
+        constructor(name, weight, speed, say, status) {
+            super(name, weight, speed, say);
+            this.status = status;
+        }
+        getStatus(){
+            if(this.status){
+                console.log('TAO CHẾT RỒI! ĂN TAO ĐI')
+            } else {
+                console.log('TAO VẪN ĐANG SỐNG NHỮNG NGÀY THÁNG TƯƠI ĐẸP')
+
+            }
+            return this.status;
+        }
+        setStatus(status){
+            this.status = status;
+        }
+    }
+    class Cat extends Animal{
+        constructor(name, weight, speed, say) {
+            super(name, weight, speed, say);
+        }
+        catchMouse(mouse){
+            if(super.getSpeed()>mouse.getSpeed()){
+                console.log('TAO ĐÃ BẮT ĐƯỢC MÀY! HAHA')
+                mouse.setStatus(true);
+            } else {
+                console.log('NÓ CHẠY NHANH VÃI! ANH CHỊU!!!')
+            }
+        }
+        eatMouse(mouse){
+            if(mouse.getStatus()){
+                super.setWeight(super.getWeight()+mouse.getWeight());
+                console.log('ĐÂY LÀ TAO SAU KHI ĂN: ', super.getWeight())
+            } else {
+                console.log('CÓ BẮT ĐƯỢC NÓ ĐÉO ĐÂU MÀ ĂN')
+            }
+        }
+    }
+    let mouse1 = new Mouse('JERRY', 20, 50, 'CHÍT CHÍT', false);
+    let mouse2 = new Mouse('BỐ JERRY', 30, 10, 'TAO SẮP CHẾT RỒI', false)
+    let cat = new Cat('TOM', 30, 40, 'GRAO GRAO!!!')
+</script>
+</body>
+</html>

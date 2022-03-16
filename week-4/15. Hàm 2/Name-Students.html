@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    table{
+        width:100%;
+    }
+</style>
+<h1 style="color:blue">Student Manage</h1>
+<span style="color: red" id="validate"></span>
+<input type="text" id="create_student">
+<button onclick="createStudent">Create</button>
+<input type="text" id="search" oninput="actionSearch()">
+<button onclick="actionSearch()">Search</button>
+<table border="1">
+    <tr>
+        <td>STT</td>
+        <td>NAME</td>
+        <td>EDIT</td>
+        <td>DELETE</td>
+    </tr>
+    <tbody id="drawTable">
+    </tbody>
+</table>
+</body>
+<script>
+    let studentList = ['Nguyen Van A', 'Nguyen Van B', 'Nguyen Van C'];
+    function showListStudent() {
+        let drawTable = '';
+        for (let i = 0; i < studentList.length; i++) {
+            let j = i +1;
+            drawTable+='<tr>'+
+                '<td>'+j+'</td>'+
+                '<td>'+studentList[i]+'</td>'+
+                '<td>'+'<button onclick="editStudent('+i+')">Edit</button>'+'</td>'+
+                '<td>'+'<button onclick="deleteStudent('+i+')">Delete</button>'+'</td>'+
+                '</tr>'
+        }
+        document.getElementById('drawTable').innerHTML = drawTable;
+    }
+    showListStudent();
+    function createStudent(){
+        let newStudent=document.getElementById('name_student').value;
+        if(newStudent.trim() ===''){
+            document.getElementById('validate').innerHTML='The name student is required! please try again';
+            return;
+        } else {
+            studentList.push(newStudent);
+            document.getElementById('validate').innerHTML='<span>'
+        }
+
+    }
+
+
+</script>
+</html>

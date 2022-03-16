@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1" style="width:100%"></table>
+<tr>
+    <td>Nhap vao chieu rong</td>
+    <td><input type="number" id="height"></td>
+</tr>
+<tr>
+    <td>Nhap vao chieu rong</td>
+    <td><input type="number" id="width"></td>
+</tr>
+<tr>
+    <td>Area of rectangle</td>
+    <td><h1 id="area"></h1></td>
+</tr>
+<tr>
+    <td> Perimeter of rectangle</td>
+    <td><h1 id="perimeter"></h1></td>
+</tr>
+<tr>
+    <td><button>Show result</button></td>
+    <td><button>Reset</button></td>
+</tr>
+<tr>
+    <td colspan="2"><canvas id="myCanvas" width="1000px" style="border:1px solid green"></canvas></td>
+</tr>
+<script>
+    class Stone{
+        constructor(width,height){
+            this.width=width;
+            this.height=height;
+        }
+        getWidth(){
+            return this.width;
+        }
+        setWidth(width){
+            this.width=width;
+        }
+        getHeight(){
+            return this.height;
+        }
+        setHeight(){
+            this.height=height;
+        }
+        getArea(){
+            return this.height*this.width
+        }
+        getPerimeter(){
+            return (this.width*2)+(this.height*2)
+        }
+    }
+    function showResult(){
+        let width=document.getElementById("width").value;
+        let height=document.getElementById("height").value;
+        let rectangle1= new Rectangle(width,height)
+        let canvas1= document.getElementById("myCanvas")
+        let ctx= canvas1.getContext("2d")
+        ctx.beginPath()
+        ctx.fillStyle="#fff333"
+        ctx.fillRect(100,100,width,height)
+        ctx.stroke();
+        let area=rectangle1.getArea();
+        document.getElementById("area").innerHTML=area;
+        let perimeter= rectangle1.getPerimeter();
+        document.getElementById("perimeter").innerHTML= perimeter;
+    }
+</script>
+</body>
+</html>
